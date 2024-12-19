@@ -121,6 +121,7 @@ index=* host=<Windows-Hostname>
 
 <h2>Data Ingestion</h2>
 The Splunk Universal Forwarder now sends logs from the Windows Security Event Log (EventCode 4624, 4625, 4672, and others) to Splunk Enterprise. Key events include:
+<br />
 - Successful Logins (4624). <br />
 - Failed Login Attempts (4625). <br />
 - Privilege Escalation (4672).
@@ -128,6 +129,11 @@ The Splunk Universal Forwarder now sends logs from the Windows Security Event Lo
 At this point, we are going to create a Dashboard to customize exactly what we want to analize.
 
 <h2>Dashboard Overview</h2>
+
+![Dashboard](Dashboard.png) 
+<br />
+![Dashboard1](Dashboard1.png)
+
 <h3>Purpose</h3>
 The Windows Security Monitoring Dashboard provides visualizations to:
 - Identify user login behavior (successes and failures). <br />
@@ -159,28 +165,29 @@ The Windows Security Monitoring Dashboard provides visualizations to:
   <tr>
   <td>Top Security Event Codes</td>
   <td>Displays the most common Windows Security Event Codes</td>
-  <td>Bar Chart</td>
+  <td>Table</td>
   </tr>
   <tr>
   <td>High-Volume Failed Accounts</td>
   <td>Identifies accounts with a high number of failed login attempts (>5 failures)</td>
-  <td>Table</td>
+  <td>Bar Chart</td>
   </tr>
   <tr>
   <td>Privilege Escalations</td>
   <td>Highlights accounts assigned special privileges (EventCode 4672).</td>
+  <td>Line Chart</td>
+  </tr>
+  <tr>
+  <td>Event Log Source Breakdown</td>
+  <td>Gives an overview of the log sources being monitored</td>
   <td>Pie Chart</td>
   </tr>
   <tr>
-  <td>Overview</td>
-  <td>?</td>
+  <td>Account Lockouts</td>
+  <td>Shows which accounts were locked out</td>
   <td>Table</td>
-  </tr>
-  <tr>
-  <td>Failed Login Attemps</td>
-  <td>Shows the number of failed logins for each user</td>
-  <td>Bar Chart</td>
   </tr>
 </table>
 
 <h2>Alerts</h2>
+This section outlines the configuration and functionality of the alert set up to detect potential brute-force attacks by monitoring multiple failed login attempts. <br />

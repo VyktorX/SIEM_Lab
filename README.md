@@ -190,4 +190,54 @@ The Windows Security Monitoring Dashboard provides visualizations to:
 </table>
 
 <h2>Alerts</h2>
-This section outlines the configuration and functionality of the alert set up to detect potential brute-force attacks by monitoring multiple failed login attempts. <br />
+This alert is designed to identify brute-force attempts by detecting multiple failed login attempts (EventCode=4625) for a single user within a defined time window. <br />
+
+<h3>Alert Configuration</h3>
+<table>
+   <tr>
+      <th>Field</th>
+      <th>Details</th>
+   </tr>
+   <tr>
+      <td>Title</td>
+      <td>Multiple Failed Logins (Brute-Force Detection)</td>
+   </tr>
+   <tr>
+      <td>Description</td>
+      <td>Alert Triggered for multiple failed logins (>=5) detected on user accounts</td>
+   </tr>
+   <tr>
+      <td>Permissions</td>
+      <td>Private (testing phase) or Shared in App (for collaboration)</td>
+   </tr>
+   <tr>
+      <td>Alert Type</td>
+      <td>Scheduled</td>
+   </tr>
+   <tr>
+      <td>Run Frequency</td>
+      <td>Every 5 minutes (via Cron Schedule */5 * * * *)</td>
+   </tr>
+   <tr>
+      <td>Expires</td>
+      <td>24 hours</td>
+   </tr>
+   <tr>
+      <td>Trigger Conditions</td>
+      <td>Number of Results > 0 (results include users with 5+ failed logins due to the search query)</td>
+   </tr>
+   <tr>
+      <td>Trigger Actions</td>
+      <td>-Log event <br /> -Send Email Notification (if configured)</td>
+   </tr>
+</table>
+
+<h3>Search Query</h3>
+
+```bash
+index=* sourcetype=WinEvtLogs:Security eventcode=4625
+| stats count by Account_Name
+| where count >= 5
+```
+![Alert Search Query](AlertSearch.png)
+![AlertConf1](AlertConf1.png)

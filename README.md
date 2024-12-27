@@ -241,3 +241,21 @@ index=* sourcetype=WinEvtLogs:Security eventcode=4625
 ```
 ![Alert Search Query](AlertSearch.png)
 ![AlertConf1](AlertConf1.png)
+
+<h3>Trigger Actions</h3>
+
+When the alert triggers, the following actions are executed: <br />
+1. Log Event: The alert logs the following message to the alert_events index:
+
+```bash
+Alert triggered: Multiple failed logins detected.
+User: $result.Account_Name$
+Count: $result.count$
+```
+2. Email Notification (optional): Sends a notification to a configured email address.
+
+<h2>FYI: I am currently experiencing issues with the alerts notification, so I will try to update this as soon as I am able to fix it</h2>
+
+<h2>Future Enhancements</h2>
+- Add alerts for privileged logins (EventCode=4672). <br />
+- Create thresholds for spikes in failed logins (e.g., greater than twice the average rate).
